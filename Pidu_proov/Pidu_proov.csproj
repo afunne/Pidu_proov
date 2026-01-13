@@ -203,6 +203,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\ei_tule.png" />
+    <Content Include="Images\pilt.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -259,6 +261,8 @@
     <Content Include="Views\Pyhas\Details.cshtml" />
     <Content Include="Views\Pyhas\Edit.cshtml" />
     <Content Include="Views\Pyhas\Index.cshtml" />
+    <Content Include="Views\Home\Ankeet.cshtml" />
+    <Content Include="Views\Home\Tanan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

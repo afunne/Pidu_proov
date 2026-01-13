@@ -10,6 +10,7 @@ using Pidu_proov.Models;
 
 namespace Pidu_proov.Controllers
 {
+    //[Authorize] //Ainult sisse loogitud kasutajatele
     public class PyhasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
