@@ -10,108 +10,87 @@ using Pidu_proov.Models;
 
 namespace Pidu_proov.Controllers
 {
-    [Authorize(Roles ="Admin")] //Ainult sisse loogitud kasutajatele
-    public class PyhasController : Controller
+    public class KylalinesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Pyhas
+        // GET: Kylalines Kõik külalised ja nende valikud
         public ActionResult Index()
         {
-            return View(db.Pyhad.ToList());
+            var kylalised = db.Kylalised.Include(k => k.Pyha).ToList();
+            return View(kylalised);
         }
 
-        // GET: Pyhas/Details/5
+        // GET: Kylalines/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pyha pyha = db.Pyhad.Find(id);
-            if (pyha == null)
+            Kylaline kylaline = db.Kylalised.Find(id);
+            if (kylaline == null)
             {
                 return HttpNotFound();
             }
-            return View(pyha);
+            return View(kylaline);
         }
 
-        // GET: Pyhas/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        
 
-        // POST: Pyhas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nimetus,Kuupaev")] Pyha pyha)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Pyhad.Add(pyha);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(pyha);
-        }
-
-        // GET: Pyhas/Edit/5
+        // GET: Kylalines/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pyha pyha = db.Pyhad.Find(id);
-            if (pyha == null)
+            Kylaline kylaline = db.Kylalised.Find(id);
+            if (kylaline == null)
             {
                 return HttpNotFound();
             }
-            return View(pyha);
+            return View(kylaline);
         }
 
-        // POST: Pyhas/Edit/5
+        // POST: Kylalines/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nimetus,Kuupaev")] Pyha pyha)
+        public ActionResult Edit([Bind(Include = "Id,Nimi,Email,OnKutse,PyhaId")] Kylaline kylaline)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pyha).State = EntityState.Modified;
+                db.Entry(kylaline).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pyha);
+            return View(kylaline);
         }
 
-        // GET: Pyhas/Delete/5
+        // GET: Kylalines/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pyha pyha = db.Pyhad.Find(id);
-            if (pyha == null)
+            Kylaline kylaline = db.Kylalised.Find(id);
+            if (kylaline == null)
             {
                 return HttpNotFound();
             }
-            return View(pyha);
+            return View(kylaline);
         }
 
-        // POST: Pyhas/Delete/5
+        // POST: Kylalines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Pyha pyha = db.Pyhad.Find(id);
-            db.Pyhad.Remove(pyha);
+            Kylaline kylaline = db.Kylalised.Find(id);
+            db.Kylalised.Remove(kylaline);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -123,6 +102,20 @@ namespace Pidu_proov.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        // Filtreeritud andmed: Tulevad külalised
+        public ActionResult Tulevad()
+        {
+            var tulevad = db.Kylalised.Where(k => k.OnKutse == true).ToList();
+            ViewBag.Filter = "Tulevad külalised";
+            return View("Index",tulevad);
+        }
+        // Filtreeritud andmed: Mitte tulevad külalised
+        public ActionResult MitteTulevad()
+        {
+            var mitteTulevad = db.Kylalised.Where(k => k.OnKutse == false).ToList();
+            ViewBag.Filter = "Mitte tulevad külalised";
+            return View("Index",mitteTulevad);
         }
     }
 }
