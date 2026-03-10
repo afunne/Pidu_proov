@@ -30,3 +30,14 @@ else
         <img src="@Url.Content("~/Images/" + ViewBag.Pilt)" style="width:300px;" />
     </div>*@
 @Html.ActionLink("Tagasi avalehele", "Index", "Home", null, new { @class = "btn btn-default" })
+
+@if (ViewBag.EmailViga != null)
+{
+    <div class="alert alert-danger" style="margin-top:15px;">
+        <strong>E-kirja saatmine ebaõnnestus:</strong> @ViewBag.EmailViga
+    </div>
+}
+else
+{
+    <p class="text-success" style="margin-top:15px;">✔ E-kiri saadeti edukalt aadressile @Model.Email</p>
+}

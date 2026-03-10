@@ -47,6 +47,17 @@
             {
                 userManager.AddToRole(adminUser.Id, "Admin");
             }
+
+            // 4. Seemne pühad, kui tabel on tühi
+            if (!context.Pyhad.Any())
+            {
+                context.Pyhad.AddOrUpdate(p => p.Nimetus,
+                    new Pidu_proov.Models.Pyha { Nimetus = "Jõulupidu", Kuupaev = new DateTime(2026, 12, 20), HindMin = 10, HindMax = 50 },
+                    new Pidu_proov.Models.Pyha { Nimetus = "Suvepidu", Kuupaev = new DateTime(2026, 6, 21), HindMin = 5, HindMax = 30 },
+                    new Pidu_proov.Models.Pyha { Nimetus = "Sünnipäevapidu", Kuupaev = new DateTime(2026, 9, 15), HindMin = 0, HindMax = 20 }
+                );
+                context.SaveChanges();
+            }
         }
     }
 }

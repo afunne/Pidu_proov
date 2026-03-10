@@ -1,4 +1,5 @@
 ﻿using Pidu_proov.Models;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web.Helpers;
@@ -66,11 +67,11 @@ namespace Pidu_proov.Controllers
             {
                 ViewBag.Pilt = "ei_tule.png";
             }
-            SaadaEmail(kylaline, ViewBag.Pilt, ViewBag.Pyhanimetus);
+            ViewBag.EmailViga = SaadaEmail(kylaline, ViewBag.Pilt, ViewBag.Pyhanimetus);
             return View("Tanan",kylaline);
         }
         //https://myaccount.google.com/apppasswords Meetod e-kirja saatmiseks
-        private void SaadaEmail(Kylaline kylaline, string pilt, string pyha)
+        private string SaadaEmail(Kylaline kylaline, string pilt, string pyha)
         {
             string failiTee = Path.Combine(Server.MapPath("~/Images/"), pilt);
             try
@@ -79,9 +80,9 @@ namespace Pidu_proov.Controllers
                 WebMail.SmtpServer = "smtp.gmail.com";
                 WebMail.SmtpPort = 587;
                 WebMail.EnableSsl = true;
-                WebMail.UserName = "oleinik.marina@gmail.com"; // Sinu e-post
-                WebMail.Password = "bqwx pyyu pljv zbst"; //"sinu_rakenduse_parool"; // Google App Password
-                WebMail.From = "oleinik.marina@gmail.com";
+                WebMail.UserName = ConfigurationManager.AppSettings["EmailUsername"];
+                WebMail.Password = ConfigurationManager.AppSettings["EmailPassword"];
+                WebMail.From = ConfigurationManager.AppSettings["EmailFrom"];
 
                 // Kirja sisu koostamine
                 string sisu = "";
@@ -108,11 +109,13 @@ namespace Pidu_proov.Controllers
                     isBodyHtml: true,
                     filesToAttach: new string[] { failiTee } // Lisa pilt manusena
                 );
+                return null; // Edu - viga pole
             }
             catch (System.Exception ex)
             {
-                // Veatuvastus (valikuline)
+                // Veatuvastus
                 System.Diagnostics.Debug.WriteLine("E-maili viga: " + ex.Message);
+                return ex.Message;
             }
         }
     }
