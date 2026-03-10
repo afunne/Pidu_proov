@@ -86,7 +86,7 @@ namespace Pidu_proov.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Vale e-post või parool.");
                     return View(model);
             }
         }
@@ -129,7 +129,7 @@ namespace Pidu_proov.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", "Vale kood.");
                     return View(model);
             }
         }

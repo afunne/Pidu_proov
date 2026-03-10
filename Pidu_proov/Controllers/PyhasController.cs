@@ -47,7 +47,7 @@ namespace Pidu_proov.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nimetus,Kuupaev")] Pyha pyha)
+        public ActionResult Create([Bind(Include = "Id,Nimetus,Kuupaev,HindMin,HindMax")] Pyha pyha)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Pidu_proov.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nimetus,Kuupaev")] Pyha pyha)
+        public ActionResult Edit([Bind(Include = "Id,Nimetus,Kuupaev,HindMin,HindMax")] Pyha pyha)
         {
             if (ModelState.IsValid)
             {

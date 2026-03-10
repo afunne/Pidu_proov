@@ -1,13 +1,13 @@
 ﻿@model Pidu_proov.Models.Kylaline
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Külaline detailid";
 }
 
-<h2>Details</h2>
+<h2>Külaline detailid</h2>
 
 <div>
-    <h4>Kylaline</h4>
+    <h4>Külaline</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -35,16 +35,30 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PyhaId)
+            Üritus
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PyhaId)
+            @Html.DisplayFor(model => model.Pyha.Nimetus)
+        </dd>
+
+        <dt>
+            Hind
+        </dt>
+
+        <dd>
+            @if (Model.OnKutse) {
+                <strong>@Model.Pyha.HindMax €</strong>
+                <span class="text-muted"> – maksimaalne hind (tuleb koos inimestega)</span>
+            } else {
+                <strong>@Model.Pyha.HindMin €</strong>
+                <span class="text-muted"> – minimaalne hind (tuleb üksinda)</span>
+            }
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Muuda", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Tagasi nimekirja", "Index")
 </p>

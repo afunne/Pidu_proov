@@ -25,6 +25,12 @@
             Üritus
         </th>
         <th>
+            Tuleb koos inimestega
+        </th>
+        <th>
+            Hind
+        </th>
+        <th>
             Tegevused
         </th>
         <th></th>
@@ -41,11 +47,26 @@
         <td>
             @Html.DisplayFor(modelItem => item.Pyha.Nimetus)
         </td>
-
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @if (item.OnKutse) {
+                <span class="badge bg-success">Jah (koos inimestega)</span>
+            } else {
+                <span class="badge bg-secondary">Ei (üksinda)</span>
+            }
+        </td>
+        <td>
+            @if (item.OnKutse) {
+                <strong>@item.Pyha.HindMax €</strong>
+                <small class="text-muted d-block">(maksimaalne hind – tuleb koos inimestega)</small>
+            } else {
+                <strong>@item.Pyha.HindMin €</strong>
+                <small class="text-muted d-block">(minimaalne hind – tuleb üksinda)</small>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Muuda", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detailid", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Kustuta", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

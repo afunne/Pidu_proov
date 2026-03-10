@@ -12,7 +12,8 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "Pidu_proov.Models.ApplicationDbContext";
         }
 
@@ -31,13 +32,13 @@
             }
 
             // 2. Loo administraatori kasutaja
-            var adminEmail = "oleinik.marina@gmail.com";
+            var adminEmail = "tahmazovhussejn@gmail.com";
             var adminUser = context.Users.FirstOrDefault(u => u.Email == adminEmail);
 
             if (adminUser == null)
             {
                 var user = new ApplicationUser { UserName = adminEmail, Email = adminEmail };
-                userManager.Create(user, "Parool123!"); // Vali turvaline parool
+                userManager.Create(user, "admin123"); // Vali turvaline parool
                 adminUser = user;
             }
 

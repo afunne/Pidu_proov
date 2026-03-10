@@ -1,10 +1,10 @@
 ﻿@model Pidu_proov.Models.Pyha
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Lisa uus püha";
 }
 
-<h2>Create</h2>
+<h2>Lisa uus püha</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Pyha</h4>
+        <h4>Püha</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -32,17 +32,72 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2">Hinnavahemik (&euro;)</label>
+            <div class="col-md-10">
+                <div class="price-slider-wrapper">
+                    <div class="price-display">Valitud: <strong id="create-price-label">0 &euro; &ndash; 200 &euro;</strong></div>
+                    <div class="slider-container">
+                        <div class="slider-track" id="create-track"></div>
+                        <input type="range" id="create-slider-min" min="0" max="200" step="5" value="0" class="price-slider" />
+                        <input type="range" id="create-slider-max" min="0" max="200" step="5" value="200" class="price-slider" />
+                    </div>
+                    <div class="slider-labels"><span>0 &euro;</span><span>200 &euro;</span></div>
+                </div>
+                @Html.HiddenFor(model => model.HindMin)
+                @Html.HiddenFor(model => model.HindMax)
+                @Html.ValidationMessageFor(model => model.HindMin, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.HindMax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Lisa" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tagasi nimekirja", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <style>
+        .price-slider-wrapper { padding: 10px 0; }
+        .price-display { margin-bottom: 10px; font-size: 15px; }
+        .slider-container { position: relative; height: 36px; }
+        .slider-track { position: absolute; top: 50%; left: 0; right: 0; height: 6px; background: #bbdefb; border-radius: 3px; transform: translateY(-50%); pointer-events: none; }
+        .price-slider { position: absolute; width: 100%; top: 50%; transform: translateY(-50%); appearance: none; -webkit-appearance: none; background: transparent; pointer-events: none; margin: 0; }
+        .price-slider::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #1565c0; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer; pointer-events: all; }
+        .price-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #1565c0; border: 2px solid #fff; cursor: pointer; pointer-events: all; }
+        .slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: #888; margin-top: 4px; }
+    </style>
+    <script>
+        (function () {
+            var minSlider = document.getElementById('create-slider-min');
+            var maxSlider = document.getElementById('create-slider-max');
+            var label = document.getElementById('create-price-label');
+            var track = document.getElementById('create-track');
+            var hiddenMin = document.getElementById('HindMin');
+            var hiddenMax = document.getElementById('HindMax');
+
+            function updateSlider() {
+                var min = parseInt(minSlider.value);
+                var max = parseInt(maxSlider.value);
+                if (min > max) { min = max; minSlider.value = min; }
+                var pMin = (min / minSlider.max) * 100;
+                var pMax = (max / maxSlider.max) * 100;
+                track.style.background = 'linear-gradient(to right, #bbdefb ' + pMin + '%, #1565c0 ' + pMin + '%, #1565c0 ' + pMax + '%, #bbdefb ' + pMax + '%)';
+                label.textContent = min + ' € – ' + max + ' €';
+                hiddenMin.value = min;
+                hiddenMax.value = max;
+            }
+
+            minSlider.addEventListener('input', updateSlider);
+            maxSlider.addEventListener('input', updateSlider);
+            updateSlider();
+        })();
+    </script>
 }

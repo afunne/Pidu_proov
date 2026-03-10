@@ -1,8 +1,19 @@
-﻿/* Set padding to keep content from hitting the edges */
+﻿/* Blue theme - body */
+body {
+    background-color: #e8f0fe;
+    color: #1a2e4a;
+}
+
+/* Set padding to keep content from hitting the edges */
 .body-content {
     margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(21, 101, 192, 0.12);
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -17,4 +28,96 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* Blue theme - navbar */
+.navbar {
+    background-color: #1565c0 !important;
+    border-bottom: 3px solid #0d47a1;
+}
+
+.navbar-brand,
+.navbar .nav-link {
+    color: #ffffff !important;
+}
+
+.navbar .nav-link:hover {
+    color: #bbdefb !important;
+}
+
+.navbar-brand:hover {
+    color: #e3f2fd !important;
+}
+
+/* Blue theme - headings */
+h1, h2, h3 {
+    color: #1565c0;
+}
+
+/* Blue theme - buttons */
+.btn-default,
+.btn-outline-dark {
+    background-color: #1976d2;
+    border-color: #1565c0;
+    color: #ffffff !important;
+}
+
+.btn-default:hover,
+.btn-outline-dark:hover {
+    background-color: #0d47a1;
+    border-color: #0d47a1;
+    color: #ffffff !important;
+}
+
+.btn-primary {
+    background-color: #1565c0;
+    border-color: #0d47a1;
+}
+
+.btn-primary:hover {
+    background-color: #0d47a1;
+    border-color: #0a3880;
+}
+
+/* Blue theme - table */
+.table > thead > tr > th {
+    background-color: #1565c0;
+    color: #ffffff;
+    border-color: #0d47a1;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #e8f0fe;
+}
+
+/* Blue theme - form controls */
+.form-control:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+}
+
+/* Blue theme - links */
+a {
+    color: #1976d2;
+}
+
+a:hover {
+    color: #0d47a1;
+}
+
+/* Blue theme - footer */
+footer {
+    border-top: 2px solid #bbdefb;
+    margin-top: 20px;
+    padding-top: 10px;
+    color: #1565c0;
+}
+
+/* Blue theme - validation */
+.text-danger {
+    color: #d32f2f !important;
+}
+
+.text-success {
+    color: #2e7d32 !important;
 }

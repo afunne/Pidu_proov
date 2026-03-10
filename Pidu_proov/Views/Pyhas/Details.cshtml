@@ -1,13 +1,13 @@
 ﻿@model Pidu_proov.Models.Pyha
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Püha detailid";
 }
 
-<h2>Details</h2>
+<h2>Püha detailid</h2>
 
 <div>
-    <h4>Pyha</h4>
+    <h4>Püha</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -26,9 +26,25 @@
             @Html.DisplayFor(model => model.Kuupaev)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.HindMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HindMin) €
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HindMax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HindMax) €
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Muuda", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Tagasi nimekirja", "Index")
 </p>

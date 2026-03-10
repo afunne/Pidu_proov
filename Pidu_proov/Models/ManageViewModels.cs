@@ -27,54 +27,54 @@ namespace Pidu_proov.Models
 
     public class SetPasswordViewModel
     {
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Parool on kohustuslik.")]
+        [StringLength(100, ErrorMessage = "{0} peab olema vähemalt {2} tähemärki pikk.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Uus parool")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Kinnita uus parool")]
+        [Compare("NewPassword", ErrorMessage = "Uus parool ja kinnitusparool ei ühti.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Praegune parool on kohustuslik.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Praegune parool")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Uus parool on kohustuslik.")]
+        [StringLength(100, ErrorMessage = "{0} peab olema vähemalt {2} tähemärki pikk.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Uus parool")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Kinnita uus parool")]
+        [Compare("NewPassword", ErrorMessage = "Uus parool ja kinnitusparool ei ühti.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class AddPhoneNumberViewModel
     {
-        [Required]
-        [Phone]
-        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Telefoninumber on kohustuslik.")]
+        [Phone(ErrorMessage = "Palun sisesta korrektne telefoninumber.")]
+        [Display(Name = "Telefoninumber")]
         public string Number { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
     {
-        [Required]
-        [Display(Name = "Code")]
+        [Required(ErrorMessage = "Kood on kohustuslik.")]
+        [Display(Name = "Kood")]
         public string Code { get; set; }
 
-        [Required]
-        [Phone]
-        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Telefoninumber on kohustuslik.")]
+        [Phone(ErrorMessage = "Palun sisesta korrektne telefoninumber.")]
+        [Display(Name = "Telefoninumber")]
         public string PhoneNumber { get; set; }
     }
 

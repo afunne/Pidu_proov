@@ -5,8 +5,8 @@ namespace Pidu_proov.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "E-post on kohustuslik.")]
+        [Display(Name = "E-post")]
         public string Email { get; set; }
     }
 
@@ -25,15 +25,15 @@ namespace Pidu_proov.Models
 
     public class VerifyCodeViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Teenusepakkuja on kohustuslik.")]
         public string Provider { get; set; }
 
-        [Required]
-        [Display(Name = "Code")]
+        [Required(ErrorMessage = "Kood on kohustuslik.")]
+        [Display(Name = "Kood")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Mäleta seda brauserit?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -48,55 +48,55 @@ namespace Pidu_proov.Models
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Required(ErrorMessage = "E-post on kohustuslik.")]
+        [Display(Name = "E-post")]
+        [EmailAddress(ErrorMessage = "Palun sisesta korrektne e-posti aadress.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Parool on kohustuslik.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parool")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Mäleta mind?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "E-post on kohustuslik.")]
+        [EmailAddress(ErrorMessage = "Palun sisesta korrektne e-posti aadress.")]
+        [Display(Name = "E-post")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Parool on kohustuslik.")]
+        [StringLength(100, ErrorMessage = "{0} peab olema vähemalt {2} tähemärki pikk.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parool")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Kinnita parool")]
+        [Compare("Password", ErrorMessage = "Parool ja kinnitusparool ei ühti.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "E-post on kohustuslik.")]
+        [EmailAddress(ErrorMessage = "Palun sisesta korrektne e-posti aadress.")]
+        [Display(Name = "E-post")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Parool on kohustuslik.")]
+        [StringLength(100, ErrorMessage = "{0} peab olema vähemalt {2} tähemärki pikk.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parool")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Kinnita parool")]
+        [Compare("Password", ErrorMessage = "Parool ja kinnitusparool ei ühti.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -104,9 +104,9 @@ namespace Pidu_proov.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "E-post on kohustuslik.")]
+        [EmailAddress(ErrorMessage = "Palun sisesta korrektne e-posti aadress.")]
+        [Display(Name = "E-post")]
         public string Email { get; set; }
     }
 }
